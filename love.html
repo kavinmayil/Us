@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kavin ❤️ Boomi - Love</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cursive', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    header {
+      font-size: 1.6em;
+      font-weight: bold;
+      padding: 15px;
+      text-shadow: 2px 2px 6px black;
+      animation: heartbeat 2s infinite;
+    }
+
+    .lyrics {
+      font-size: 1.2em;
+      margin: 15px;
+      line-height: 1.6;
+      animation: fadeInUp 2s ease-in-out;
+      min-height: 60px;
+    }
+
+    .image-container {
+      margin: 20px 0;
+    }
+
+    .image-container img {
+      width: 90%;
+      max-width: 320px;
+      border-radius: 20px;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.6);
+      display: none;
+      animation: zoomIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes fadeInUp {
+      from {transform: translateY(20px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes zoomIn {
+      from {transform: scale(0.8); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <header>Kavin ❤️ Boomi</header>
+
+  <div class="lyrics" id="lyricsBox">💖 Our Love Song 💖</div>
+
+  <div class="image-container" id="imgContainer">
+    <img src="pic1.jpg" alt="Pic 1">
+    <img src="pic2.jpg" alt="Pic 2">
+    <img src="pic3.jpg" alt="Pic 3">
+    <img src="pic4.jpg" alt="Pic 4">
+    <img src="pic5.jpg" alt="Pic 5">
+    <img src="pic6.jpg" alt="Pic 6">
+    <img src="pic7.jpg" alt="Pic 7">
+    <img src="pic8.jpg" alt="Pic 8">
+  </div>
+
+  <!-- Background music -->
+  <audio autoplay loop>
+    <source src="kadhaipoma.mp3" type="audio/mp3">
+    Your browser does not support audio.
+  </audio>
+
+  <script>
+    // Song lyrics (sample – you can add full lyrics here)
+    const lyrics = [
+      "Nee dhaan en kaadhal kaadhal... 💕",
+      "Unnodu dhaan naan vaazhum vaazhvum... 🎶",
+      "Unnaal dhaan naan konda sirippu... 😊",
+      "Unnaal dhaan naan konda aasai... ❤️",
+      "Kadhaipoma en Kaadhal Kathai... 💖",
+      "Endrum thodarum indha kaadhal payanam... ✨"
+    ];
+
+    let lyricIndex = 0;
+    const lyricsBox = document.getElementById("lyricsBox");
+
+    function showLyrics() {
+      lyricsBox.textContent = lyrics[lyricIndex];
+      lyricIndex = (lyricIndex + 1) % lyrics.length;
+    }
+    setInterval(showLyrics, 4000); // change lyric every 4s
+
+    // Show images randomly with 5s delay
+    const images = Array.from(document.querySelectorAll("#imgContainer img"));
+
+    // Shuffle images
+    for (let i = images.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [images[i].src, images[j].src] = [images[j].src, images[i].src];
+    }
+
+    let imgIndex = 0;
+    function showNextImage() {
+      images.forEach(img => img.style.display = "none");
+      images[imgIndex].style.display = "block";
+      imgIndex = (imgIndex + 1) % images.length;
+    }
+    setInterval(showNextImage, 5000); // change image every 5s
+
+    // Show first image immediately
+    showNextImage();
+  </script>
+</body>
+</html>
