@@ -9,13 +9,15 @@
       margin: 0;
       padding: 0;
       font-family: 'Poppins', cursive, sans-serif;
-      background: #fefefe;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
       color: #ff2d55;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
     }
 
     header {
@@ -25,7 +27,7 @@
       background: linear-gradient(90deg, #ff4d6d, #ff94c2);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: fadeIn 2s ease-in-out;
+      animation: glow 2s infinite alternate;
     }
 
     .photo-block {
@@ -38,6 +40,7 @@
       max-width: 320px;
       border-radius: 15px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      transition: opacity 1s ease-in-out;
     }
 
     .caption {
@@ -53,11 +56,37 @@
     /* Floating heart button */
     .heart {
       position: fixed;
-      bottom: 20px;
+      bottom: 60px; /* moved up to avoid blocking text */
       font-size: 2.5rem;
       color: #ff2d55;
       cursor: pointer;
       animation: float 3s infinite ease-in-out;
+      z-index: 1000;
+    }
+
+    /* Heart rain effect */
+    .rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .raindrop {
+      position: absolute;
+      top: -20px;
+      font-size: 1.2rem;
+      color: #ff4d6d;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
     }
 
     @keyframes float {
@@ -66,14 +95,14 @@
       100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff94c2; }
+      to { text-shadow: 0 0 15px #ff2d55, 0 0 30px #ff94c2; }
     }
   </style>
 </head>
@@ -83,8 +112,8 @@
 
   <!-- First image + caption -->
   <div class="photo-block">
-    <img src="pic1.jpg" alt="Our Memory 1">
-    <div class="caption">
+    <img id="img1" src="pic1.jpg" alt="Our Memory 1">
+    <div class="caption" id="caption1">
       Hay pondati, I love you ❤️<br>
       When I saw you, I fell for you 💕<br>
       When our hands held together, my world felt complete 🌸
@@ -93,8 +122,8 @@
 
   <!-- Second image + caption -->
   <div class="photo-block">
-    <img src="pic2.jpg" alt="Our Memory 2">
-    <div class="caption">
+    <img id="img2" src="pic2.jpg" alt="Our Memory 2">
+    <div class="caption" id="caption2">
       When my life is dark, you are my sunshine ☀️<br>
       In my love forest, you will be my princess 👑<br>
       My beauty from the heart, forever mine ❤️
@@ -104,6 +133,42 @@
   <!-- Floating heart button to go next -->
   <div class="heart" onclick="window.location.href='love.html'">❤️</div>
 
+  <!-- Rain hearts container -->
+  <div class="rain" id="rain"></div>
+
+  <script>
+    // Slideshow effect (change image every 15 sec)
+    const images1 = ["pic1.jpg", "pic1b.jpg"]; // add second variation if you want
+    const images2 = ["pic2.jpg", "pic2b.jpg"];
+    let index1 = 0;
+    let index2 = 0;
+
+    setInterval(() => {
+      index1 = (index1 + 1) % images1.length;
+      document.getElementById("img1").src = images1[index1];
+    }, 15000);
+
+    setInterval(() => {
+      index2 = (index2 + 1) % images2.length;
+      document.getElementById("img2").src = images2[index2];
+    }, 15000);
+
+    // Heart rain effect
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("raindrop");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.getElementById("rain").appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
 </body>
 </html>
-
