@@ -8,62 +8,61 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: url("home.jpeg") no-repeat center center/cover;
-      height: 100vh;
+      font-family: 'Poppins', cursive, sans-serif;
+      background: #fefefe;
+      color: #ff2d55;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      color: white;
-      text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     header {
       font-size: 1.8rem;
       font-weight: bold;
-      margin-top: 15px;
-      color: #ff4d6d;
+      padding: 15px;
+      background: linear-gradient(90deg, #ff4d6d, #ff94c2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       animation: fadeIn 2s ease-in-out;
     }
 
-    .dialog {
+    .photo-block {
+      margin: 20px 0;
+      animation: fadeUp 2s ease-in-out;
+    }
+
+    .photo-block img {
+      width: 85%;
+      max-width: 320px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    }
+
+    .caption {
+      margin-top: 12px;
       font-size: 1.1rem;
-      padding: 15px;
       line-height: 1.5;
+      color: #ff3366;
+      font-weight: 500;
+      padding: 0 10px;
       animation: fadeUp 2.5s ease-in-out;
     }
 
-    .photos {
-      display: flex;
-      justify-content: space-around;
-      width: 100%;
-      margin: 20px 0;
-    }
-
-    .photos img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      animation: bounceIn 2s ease-in-out;
-    }
-
-    /* Floating hearts */
+    /* Floating heart button */
     .heart {
-      position: absolute;
+      position: fixed;
       bottom: 20px;
-      font-size: 2rem;
-      color: #ff4d6d;
+      font-size: 2.5rem;
+      color: #ff2d55;
       cursor: pointer;
-      animation: float 4s infinite;
+      animation: float 3s infinite ease-in-out;
     }
 
     @keyframes float {
       0% { transform: translateY(0) scale(1); opacity: 1; }
-      50% { transform: translateY(-30px) scale(1.2); opacity: 0.7; }
+      50% { transform: translateY(-15px) scale(1.1); opacity: 0.8; }
       100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
@@ -76,29 +75,35 @@
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes bounceIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
   </style>
 </head>
 <body>
 
   <header>Kavin ❤️ Boomi</header>
 
-  <div class="dialog">
-    <p>In my world, you are my soul, my love…</p>
-    <p>You are my today and all of my tomorrows 💕</p>
+  <!-- First image + caption -->
+  <div class="photo-block">
+    <img src="pic1.jpg" alt="Our Memory 1">
+    <div class="caption">
+      Hay pondati, I love you ❤️<br>
+      When I saw you, I fell for you 💕<br>
+      When our hands held together, my world felt complete 🌸
+    </div>
   </div>
 
-  <div class="photos">
-    <img src="you.jpeg" alt="You">
-    <img src="me.jpeg" alt="Me">
+  <!-- Second image + caption -->
+  <div class="photo-block">
+    <img src="pic2.jpg" alt="Our Memory 2">
+    <div class="caption">
+      When my life is dark, you are my sunshine ☀️<br>
+      In my love forest, you will be my princess 👑<br>
+      My beauty from the heart, forever mine ❤️
+    </div>
   </div>
 
-  <!-- Floating heart button -->
+  <!-- Floating heart button to go next -->
   <div class="heart" onclick="window.location.href='love.html'">❤️</div>
 
 </body>
 </html>
+
